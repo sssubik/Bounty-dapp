@@ -11563,12 +11563,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x9FF9c33D30475e13F69e433398595dE63c1116d6",
-      "transactionHash": "0x420f80668a6e12b08c2c58cfe1da0d37d4908d1ba1512b6091cbca512a8bec2a"
+      "address": "0xf4D60C040E881f0fcA3e52078aB0BB776d48f819",
+      "transactionHash": "0x25c68ab0b492e76154b1f588cea9323793b7f626cfea77443aca5e34ac88aa7f"
     }
   },
   "schemaVersion": "3.0.2",
-  "updatedAt": "2020-01-08T06:26:31.040Z",
+  "updatedAt": "2020-01-09T16:25:25.203Z",
   "devdoc": {
     "author": "Joshua Cassidy- <joshua.cassidy@consensys.net>",
     "details": "Simple smart contract which allows any user to issue a bounty in ETH linked to requirements stored in ipfs which anyone can fufill by submitting the ipfs hash which contains evidence of their fufillment",

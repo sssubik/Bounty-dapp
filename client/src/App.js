@@ -15,17 +15,17 @@ import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 
 import "./App.css";
-const etherscanBaseUrl = "HTTP://127.0.0.1:7545"
+
 class App extends Component {
   constructor(props){
     super(props)
     this.state = {
       storageValue: 0,
-      contract: null,
+      contract: undefined,
       bountyAmount: "1",
-      bountyData: "Enter Bounty Data",
-      bountyDeadline: 1578469999,
-      etherscanLink: "HTTP://127.0.0.1:7545",
+      bountyData: "Enter Bounty Details",
+      bountyDeadline: 1678587903,
+      
       account: null,
       web3: null,
       bounties:[]
@@ -57,23 +57,13 @@ class App extends Component {
     if (typeof this.state.contract !== 'undefined') {
       console.log("Handle Issue Bounty",this.state.account);
       event.preventDefault();
-      let result = await this.state.contract.methods.issueBounty(this.state.bountyData,this.state.bountyDeadline).send({from: this.state.account, value: this.state.web3.utils.toWei(this.state.bountyAmount, 'Ether')})
-      this.setLastTransactionDetails(result)
+      await this.state.contract.methods.issueBounty(this.state.bountyData,this.state.bountyDeadline).send({from: this.state.account, value: this.state.web3.utils.toWei(this.state.bountyAmount, 'ether')})
+      
     }
   }
-  setLastTransactionDetails(result)
-    {
-    if(result.tx !== 'undefined')
-    {
-      this.setState({etherscanLink: etherscanBaseUrl+"/tx/"+result.tx})
-    }
-    else
-    {
-      this.setState({etherscanLink: etherscanBaseUrl})
-    }
-}
+  
 
-  componentDidMount = async () => {
+  componentWillMount = async () => {
     try {
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
@@ -98,6 +88,7 @@ class App extends Component {
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
+      console.log(accounts[0]);
       this.setState({ web3:web3, account:accounts[0]
          });
     } catch (error) {
@@ -110,6 +101,7 @@ class App extends Component {
     }
     await this.loadBountiesData();
   };
+ 
   async loadBountiesData(){
     const bountyCount = await this.state.contract.methods.bountyCount().call();
     
@@ -187,9 +179,12 @@ class App extends Component {
         {
           this.state.bounties.map((bounty,key) => {
             return (
-              <p key = {key}>
-                {bounty.id}
-              </p>
+              
+              <ul className = "list-group" key = {key}>
+              
+                <li className = "list-group-item">{bounty.data}</li>
+               
+              </ul>
             )
           }
 
